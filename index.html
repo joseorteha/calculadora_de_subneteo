@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Subneteo por Hosts</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <!-- Botón de cambio de tema -->
+    <button id="theme-toggle" class="theme-toggle">☀️</button>
+
+    <main class="w-full max-w-2xl mx-auto">
+        <div class="card rounded-2xl shadow-2xl p-6 sm:p-8 text-white">
+            
+            <!-- Encabezado -->
+            <div class="text-center mb-8">
+                <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Calculadora de Subneteo</h1>
+                <p class="text-gray-300 mt-2">Introduce la cantidad de hosts para encontrar la máscara de subred óptima.</p>
+            </div>
+
+            <!-- Pestañas -->
+            <div class="tab-container mb-6">
+                <div class="tab active" data-tab="calculator-tab">Calculadora</div>
+                <div class="tab" data-tab="history-tab">Historial</div>
+                <div class="tab" data-tab="info-tab">Información</div>
+            </div>
+
+            <!-- Contenido de Pestañas -->
+            <div id="calculator-tab" class="tab-content active">
+                <!-- Formulario de Entrada -->
+                <form id="subnet-form" class="space-y-6">
+                    <div>
+                        <label for="hosts" class="block text-sm font-medium text-gray-200 mb-2">Cantidad de Hosts Necesarios:</label>
+                        <input type="number" id="hosts" name="hosts" min="1" required
+                               class="w-full bg-gray-700 border border-gray-600 rounded-lg py-3 px-4 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-200"
+                               placeholder="Ej: 25">
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 transform hover:scale-105 shadow-lg">
+                            Calcular
+                        </button>
+                        <button type="button" id="clear-btn" class="w-full bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300">
+                            Limpiar
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Sección de Resultados (inicialmente oculta) -->
+                <div id="results-section" class="mt-10 hidden">
+                    <h2 class="text-2xl font-bold text-center mb-6">Resultados del Cálculo</h2>
+                    <div class="space-y-4">
+                        
+                        <div class="result-item p-4 rounded-lg">
+                            <h3 class="font-semibold text-gray-300">Máscara de Subred (Decimal)</h3>
+                            <p id="decimal-mask" class="text-xl font-mono text-emerald-400"></p>
+                        </div>
+
+                        <div class="result-item p-4 rounded-lg">
+                            <h3 class="font-semibold text-gray-300">Máscara de Subred (Binario)</h3>
+                            <p id="binary-mask" class="text-lg font-mono text-emerald-400 break-words"></p>
+                        </div>
+
+                        <div class="result-item p-4 rounded-lg">
+                            <h3 class="font-semibold text-gray-300">Notación de Prefijo (CIDR)</h3>
+                            <p id="prefix-notation" class="text-xl font-mono text-emerald-400"></p>
+                        </div>
+                        
+                        <!-- Información adicional -->
+                        <div class="result-item p-4 rounded-lg">
+                            <h3 class="font-semibold text-gray-300">Dirección de Red</h3>
+                            <p id="network-address" class="text-xl font-mono text-emerald-400"></p>
+                        </div>
+                        
+                        <div class="result-item p-4 rounded-lg">
+                            <h3 class="font-semibold text-gray-300">Dirección de Broadcast</h3>
+                            <p id="broadcast-address" class="text-xl font-mono text-emerald-400"></p>
+                        </div>
+                        
+                        <div class="result-item p-4 rounded-lg">
+                            <h3 class="font-semibold text-gray-300">Rango de Hosts Utilizables</h3>
+                            <p id="host-range" class="text-xl font-mono text-emerald-400"></p>
+                        </div>
+                        
+                        <div class="result-item p-4 rounded-lg">
+                            <h3 class="font-semibold text-gray-300">Hosts Disponibles</h3>
+                            <p id="available-hosts" class="text-xl font-mono text-emerald-400"></p>
+                        </div>
+                    </div>
+
+                    <!-- Explicación del Proceso -->
+                    <div class="mt-8 p-5 bg-gray-800 rounded-lg border border-gray-700">
+                        <h3 class="text-lg font-semibold mb-3">¿Cómo se calculó?</h3>
+                        <div id="explanation-text" class="text-gray-300 space-y-2 text-sm">
+                            <!-- El texto de la explicación se generará con JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pestaña de Historial -->
+            <div id="history-tab" class="tab-content">
+                <h2 class="text-2xl font-bold text-center mb-6">Historial de Cálculos</h2>
+                <div id="history-container" class="space-y-3">
+                    <!-- El historial se generará con JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Pestaña de Información -->
+            <div id="info-tab" class="tab-content">
+                <h2 class="text-2xl font-bold text-center mb-6">Información sobre Subneteo</h2>
+                <div class="space-y-4 text-gray-300">
+                    <div class="p-4 bg-gray-800 rounded-lg">
+                        <h3 class="font-semibold text-lg mb-2">¿Qué es el Subneteo?</h3>
+                        <p>El subneteo es el proceso de dividir una red IP en subredes más pequeñas para mejorar la eficiencia, seguridad y administración de la red.</p>
+                    </div>
+                    
+                    <div class="p-4 bg-gray-800 rounded-lg">
+                        <h3 class="font-semibold text-lg mb-2">Clases de Direcciones IP</h3>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>Clase A:</strong> 1.0.0.0 a 126.255.255.255 (Máscara: 255.0.0.0)</li>
+                            <li><strong>Clase B:</strong> 128.0.0.0 a 191.255.255.255 (Máscara: 255.255.0.0)</li>
+                            <li><strong>Clase C:</strong> 192.0.0.0 a 223.255.255.255 (Máscara: 255.255.255.0)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="p-4 bg-gray-800 rounded-lg">
+                        <h3 class="font-semibold text-lg mb-2">Fórmulas Importantes</h3>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>Hosts por subred:</strong> 2<sup>h</sup> - 2 (donde h = bits de host)</li>
+                            <li><strong>Número de subredes:</strong> 2<sup>s</sup> (donde s = bits de subred)</li>
+                            <li><strong>Bits totales:</strong> 32 bits (IPv4)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="p-4 bg-gray-800 rounded-lg">
+                        <h3 class="font-semibold text-lg mb-2">Consejos para el Subneteo</h3>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Siempre reserve suficientes direcciones para futuros dispositivos</li>
+                            <li>Considere la segmentación lógica de su red</li>
+                            <li>Documente su esquema de subneteo</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Script personalizado -->
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+/* Estilos personalizados */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #111827; /* Gris oscuro */
+    background-image: radial-gradient(circle at top right, #1e3a8a, transparent),
+                      radial-gradient(circle at bottom left, #4338ca, transparent);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.card {
+    background-color: rgba(31, 41, 55, 0.8); /* Gris semi-transparente */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.result-item {
+    background-color: #374151; /* Gris más claro */
+    border-left: 4px solid #3b82f6; /* Acento azul */
+}
+
+/* Animación para la aparición de resultados */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Mejoras de responsividad */
+@media (max-width: 640px) {
+    .card {
+        padding: 1rem;
+    }
+    
+    h1 {
+        font-size: 1.75rem;
+    }
+    
+    .result-item {
+        padding: 0.75rem;
+    }
+}
+
+/* Nuevos estilos para funcionalidades adicionales */
+.tab-container {
+    display: flex;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1rem;
+}
+
+.tab {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s;
+}
+
+.tab.active {
+    border-bottom: 2px solid #3b82f6;
+    color: #3b82f6;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.history-item {
+    background-color: #2d3748;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.history-item:hover {
+    background-color: #374151;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltip-text {
+    visibility: hidden;
+    width: 200px;
+    background-color: #1f2937;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+.light-theme {
+    background-color: #f3f4f6;
+    background-image: radial-gradient(circle at top right, #dbeafe, transparent),
+                      radial-gradient(circle at bottom left, #e0e7ff, transparent);
+    color: #1f2937;
+}
+
+.light-theme .card {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #1f2937;
+}
+
+.light-theme .result-item {
+    background-color: #f9fafb;
+    border-left: 4px solid #3b82f6;
+}
+
+.light-theme h1, 
+.light-theme h2, 
+.light-theme h3 {
+    color: #1f2937;
+}
+
+.light-theme .text-gray-300,
+.light-theme p.text-gray-300,
+.light-theme div.text-gray-300,
+.light-theme .text-gray-400,
+.light-theme .text-gray-200,
+.light-theme label.text-gray-200 {
+    color: #4b5563 !important;
+}
+
+.light-theme .bg-gray-800,
+.light-theme .bg-gray-700,
+.light-theme div.bg-gray-800,
+.light-theme div.bg-gray-700 {
+    background-color: #e5e7eb !important;
+    color: #1f2937 !important;
+}
+
+.light-theme input {
+    background-color: #f9fafb !important;
+    border-color: #d1d5db !important;
+    color: #1f2937 !important;
+}
+
+.light-theme .tab {
+    color: #4b5563;
+}
+
+.light-theme .tab.active {
+    color: #2563eb;
+    border-bottom-color: #2563eb;
+}
+
+.light-theme .history-item {
+    background-color: #e5e7eb;
+    color: #1f2937;
+}
+
+.light-theme .history-item:hover {
+    background-color: #d1d5db;
+}
+
+.light-theme button.bg-blue-600 {
+    background-color: #2563eb !important;
+}
+
+.light-theme button.bg-blue-600:hover {
+    background-color: #1d4ed8 !important;
+}
+
+.light-theme button.bg-gray-600 {
+    background-color: #6b7280 !important;
+}
+
+.light-theme button.bg-gray-600:hover {
+    background-color: #4b5563 !important;
+}
+
+.light-theme .text-white {
+    color: #1f2937 !important;
+}
+
+.light-theme ul.list-disc li strong {
+    color: #1f2937 !important;
+}
