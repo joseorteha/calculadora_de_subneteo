@@ -58,8 +58,10 @@ cd calculadora_de_subneteo
 ## 👨‍💻 Autor
 
 <div align="center">
-  <img src="https://avatars.githubusercontent.com/u/joseorteha" width="100" style="border-radius: 50%;" alt="José Ortega">
-  <p><strong>José Ortega</strong></p>
+  <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNjZlMzRkMzRiMzRiNTRlMzI0YzJkZDRiMzI0ZDM0ZDM0YjU0ZTMyNCZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/3oKIPEqDGUULpEU0aQ/giphy.gif" width="150" alt="Author GIF">
+  
+  <h2>José Ortega</h2>
+  
   <p>
     <a href="https://github.com/joseorteha">
       <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
